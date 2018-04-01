@@ -1,0 +1,215 @@
+<% include partials/header %>
+<script type="text/javascript">
+  var flag = 0;
+  var x;
+  var y;
+	setInterval(function(){ 
+
+		var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://192.168.31.199:3000/getdata",
+  "method": "GET",
+  "headers": {
+    "cache-control": "no-cache",
+    "postman-token": "5817a2e0-8512-2892-9d21-268aa73438a4"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+
+   
+
+  if(!flag){
+  flag = 1;
+  console.log(response);
+  let newDate = new Date();
+  var time = newDate.toTimeString().toString().substring(0,8);
+  var date = newDate.toLocaleDateString();
+  x = date + " " + time;
+
+  var time2  = time;
+  time2 = (parseInt(time2.substring(0,2)) + 6 ) % 24;
+
+   y = date + " " + time2 + time.substring(2,8);
+
+  }
+
+  document.getElementById("tempID").innerHTML = response.Temp;
+  document.getElementById("lastdateID").innerHTML = x;
+  document.getElementById("tentativeID").innerHTML = y;
+  document.getElementById("humidityID").innerHTML = response.Humidity;
+
+});
+
+}, 30000);
+</script>
+
+<script type="text/javascript">
+
+window.onload = function() {
+
+  var flag = 0;
+  var x;
+  var y;
+	
+
+		var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://192.168.31.199:3000/getdata",
+  "method": "GET",
+  "headers": {
+    "cache-control": "no-cache",
+    "postman-token": "5817a2e0-8512-2892-9d21-268aa73438a4"
+  }}
+
+
+$.ajax(settings).done(function (response) {
+
+   
+
+  if(!flag){
+  flag = 1;
+  console.log(response);
+  let newDate = new Date();
+  var time = newDate.toTimeString().toString().substring(0,8);
+  var date = newDate.toLocaleDateString();
+  x = date + " " + time;
+
+  var time2  = time;
+  time2 = (parseInt(time2.substring(0,2)) + 6 ) % 24;
+
+   y = date + " " + time2 + time.substring(2,8);
+
+  }
+
+  document.getElementById("tempID").innerHTML = response.Temp;
+  document.getElementById("lastdateID").innerHTML = x;
+  document.getElementById("tentativeID").innerHTML = y;
+  document.getElementById("humidityID").innerHTML = response.Humidity;
+
+});
+
+};
+</script>
+
+
+<script type="text/javascript">
+  
+  function callmanual(){
+
+  var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://192.168.31.199:3000/manual",
+  "method": "GET",
+  "headers": {
+    "cache-control": "no-cache",
+    "postman-token": "3fd98e75-c718-b79d-6830-41a468e8c064"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+  console.log("Sudhakar");
+  console.log(response);
+
+   document.getElementById("lastdateID").innerHTML = response.d;
+});
+
+}
+
+
+</script>
+
+    <div class = "container">
+		 <header class = "jumbotron" id="backg">
+           <div class = "container">
+           	   <h1 id="mainh">Smart Gardening System</h1>
+
+		   </div>
+		 </header>
+
+	  <div class="jumbotron" id="mainbackg">
+      <div class="row">
+
+	      <div class="col-md-6 col-xs-12">
+	        
+	        <h2 class="">Last Watered</h2>
+
+	        <h2 id= "lastdateID" class="datacolor"></h2>
+
+	        <h2 class="">Next tentative watering time</h2>
+
+          <h2 id="tentativeID" class="datacolor"></h2>
+
+	        <h2 class="">Humidity</h2>
+
+	        <h2 id = "humidityID" class="datacolor"></h2>
+
+	        <h2 class="">Temp</h2>
+
+	        <h2 id = "tempID" class="datacolor"></h2>
+
+	      </div>
+
+
+
+	      <div class="col-md-6 col-xs-12 text-right">
+	       
+	        <h2 class="">Mode</h2>
+
+	        <a class ="btn btn-primary btn-large" href = "#" id="autobtn">Auto</a>
+
+	        <a class ="btn btn-primary btn-large" href = "#" id="manualbtn">Manual</a>
+
+	        <h2 class="" id="waternowbtn">Water now</h2>
+        
+	        <a class ="btn btn-primary btn-large" onclick="callmanual()" id="waterbtn">Water</a>
+
+	      </div>
+
+    
+     </div>
+     </div>
+
+	  <div class="jumbotron" id="jumbo2">
+      <div class="row">
+           <h2 id="mainh">Team Members</h2> 
+           <br>
+
+	       <div class="col-md-3 col-xs-12">
+               <ul class="ulc">
+           	      <li>Sudhakar</li>
+           	      <li>Thomas</li>
+           	      <li>Shivam</li>
+           	   </ul> 
+	       </div>
+
+	       <div class="col-md-3 col-xs-12">
+               <ul class="ulc">
+           	      <li>Shailendra</li>
+           	      <li>Varun</li>
+           	      <li>Vikash</li>
+           	   </ul> 
+	       </div>
+
+	       <div class="col-md-3 col-xs-12">
+               <ul class="ulc">
+           	      <li>Saahil</li>
+           	      <li>Tushar</li>
+           	   </ul> 
+	       </div>
+
+	       <div class="col-md-3 col-xs-12">
+               <ul class="ulc">
+           	      <li>Shiwam</li>
+           	      <li>Vishwajeet</li>
+           	   </ul> 
+	       </div>
+     </div>
+     </div>
+		
+  </div>
+
+<%include partials/footer %>
